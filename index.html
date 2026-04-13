@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>פורטל פרויקטים — מכללת אונו אקדמיק</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ───────────────────────── NAV ───────────────────────── -->
+  <nav class="navbar">
+    <a href="#" class="nav-logo">
+      <img src="ono-logo.png" alt="מכללת אונו אקדמיק" class="nav-logo-img" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="#projects">פרויקטים</a></li>
+      <li><a href="#contact">צור קשר</a></li>
+    </ul>
+  </nav>
+
+  <!-- ───────────────────────── HERO ───────────────────────── -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-overlay"></div>
+      <div class="hero-grid-bg"></div>
+    </div>
+
+    <div class="hero-content">
+      <h1 class="hero-title">
+        אתר הפרויקטים של מכללת אונו<br />
+        <span class="title-accent">מדעי המחשב</span>
+      </h1>
+
+      <p class="hero-portal-subtitle">מחלקת מדעי המחשב · גלריית פרויקטי סטודנטים</p>
+    </div>
+
+    <div class="hero-visual">
+      <div class="code-window">
+        <div class="window-bar">
+          <span class="dot-red"></span>
+          <span class="dot-yellow"></span>
+          <span class="dot-green"></span>
+          <span class="window-title">bsearch.cpp</span>
+        </div>
+        <pre class="code-block"><span class="cmt">// ── Recursive Binary Search ─────────</span>
+<span class="kw">int</span> <span class="fn">bsearch</span>(<span class="kw">int</span>* arr,
+            <span class="kw">int</span> lo, <span class="kw">int</span> hi,
+            <span class="kw">int</span> key) {
+  <span class="kw">if</span> (lo &gt; hi) <span class="kw">return</span> -<span class="num">1</span>;
+  <span class="kw">int</span> mid = lo + (hi - lo) / <span class="num">2</span>;
+  <span class="kw">if</span> (arr[mid] == key) <span class="kw">return</span> mid;
+  <span class="kw">return</span> (arr[mid] &lt; key)
+    ? <span class="fn">bsearch</span>(arr, mid+<span class="num">1</span>, hi,  key)
+    : <span class="fn">bsearch</span>(arr, lo,  mid-<span class="num">1</span>, key);
+}</pre>
+      </div>
+      <div class="hero-featured-label">
+        <span class="featured-dot"></span>
+        חיפוש בינארי · C++ · רקורסיה
+      </div>
+    </div>
+
+    <div class="hero-scroll-indicator">
+      <span>גלול לגילוי</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ───────────────────────── PROJECTS ───────────────────────── -->
+  <main id="projects" class="projects-section">
+
+    <!-- שורה 1: בינה מלאכותית -->
+    <div class="row-section">
+      <div class="row-header">
+        <div class="row-header-left">
+          <h2 class="row-title">בינה מלאכותית</h2>
+          <span class="row-subtitle">למידת מכונה · למידה עמוקה · עיבוד שפה טבעית</span>
+        </div>
+        <a href="#" class="row-see-all">הצג הכל <span>›</span></a>
+      </div>
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" aria-label="גלול ימינה">›</button>
+        <div class="carousel">
+
+          <article class="card" style="--accent: #27ae60;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #1a0a0a 0%, #3d0f0f 100%);">
+              <div class="thumb-icon">🧠</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">מסווג רשתות נוירונים</h3>
+              <p class="card-student"><span class="student-icon">👤</span> דניאל לוי</p>
+              <p class="card-desc">רשת CNN שאומנה על CIFAR-10 עם דיוק של 91% וויזואליזציה מותאמת של מפות הפעלה.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #27ae60;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #0a0a1a 0%, #0f0f3d 100%);">
+              <div class="thumb-icon">💬</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">מנתח סנטימנט בעברית</h3>
+              <p class="card-student"><span class="student-icon">👤</span> שרה כהן</p>
+              <p class="card-desc">ניתוח סנטימנט מבוסס BERT על פוסטים בעברית ברשתות חברתיות עם דיוק של 89%.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #27ae60;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #0a1a0a 0%, #0f3d0f 100%);">
+              <div class="thumb-icon">🎮</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">סוכן משחק בלמידת חיזוקים</h3>
+              <p class="card-student"><span class="student-icon">👤</span> עמית מזרחי</p>
+              <p class="card-desc">סוכן DQN שאומן לשחק Atari Breakout ברמת ביצוע-על אנושית.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #27ae60;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #1a1a0a 0%, #3d3d0f 100%);">
+              <div class="thumb-icon">🖼️</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">אפליקציית זיהוי תמונות</h3>
+              <p class="card-student"><span class="student-icon">👤</span> נועה בן-דוד</p>
+              <p class="card-desc">זיהוי עצמים בזמן אמת באמצעות YOLOv8 עם זרם מצלמה חי וסיווג אוטומטי.</p>
+            </div>
+          </article>
+
+        </div>
+        <button class="carousel-btn next" aria-label="גלול שמאלה">‹</button>
+      </div>
+    </div>
+
+    <!-- שורה 2: אלגוריתמים ומבני נתונים -->
+    <div class="row-section">
+      <div class="row-header">
+        <div class="row-header-left">
+          <h2 class="row-title">אלגוריתמים ומבני נתונים</h2>
+          <span class="row-subtitle">סיבוכיות · תורת גרפים · אופטימיזציה</span>
+        </div>
+        <a href="#" class="row-see-all">הצג הכל <span>›</span></a>
+      </div>
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" aria-label="גלול ימינה">›</button>
+        <div class="carousel">
+
+          <article class="card" style="--accent: #0070f3;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #010d1a 0%, #012a4a 100%);">
+              <div class="thumb-icon">🗺️</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">סביבת חיפוש מסלולים</h3>
+              <p class="card-student"><span class="student-icon">👤</span> יוני שפירו</p>
+              <p class="card-desc">השוואה חזותית בין Dijkstra, A* ו-BFS על קלטי גריד וגרף אינטראקטיביים.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #0070f3;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #0a0a1a 0%, #1a0a3d 100%);">
+              <div class="thumb-icon">🧬</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">פותר אלגוריתם גנטי</h3>
+              <p class="card-student"><span class="student-icon">👤</span> מאיה גולדשטיין</p>
+              <p class="card-desc">פתרון בעיית הסוכן הנוסע באמצעות ברירה אבולוציונית, הצלבות ומוטציות.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #0070f3;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #0d1a0a 0%, #1a3d0f 100%);">
+              <div class="thumb-icon">⚡</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">מדידת ביצועי אלגוריתמי מיון</h3>
+              <p class="card-student"><span class="student-icon">👤</span> אבי פרץ</p>
+              <p class="card-desc">השוואת זמני ריצה של 8 אלגוריתמי מיון על פני 10⁶ אלמנטים עם גרפים אינטראקטיביים.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #0070f3;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #1a0d0a 0%, #3d1a0f 100%);">
+              <div class="thumb-icon">🌳</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">ויזואליזציה של עץ AVL</h3>
+              <p class="card-student"><span class="student-icon">👤</span> תמר כץ</p>
+              <p class="card-desc">עץ AVL אינטראקטיבי מבוסס-ווב עם אנימציות של סיבובים ושלב-אחר-שלב.</p>
+            </div>
+          </article>
+
+        </div>
+        <button class="carousel-btn next" aria-label="גלול שמאלה">‹</button>
+      </div>
+    </div>
+
+    <!-- שורה 3: תכנות מערכות -->
+    <div class="row-section">
+      <div class="row-header">
+        <div class="row-header-left">
+          <h2 class="row-title">תכנות מערכות</h2>
+          <span class="row-subtitle">מערכות הפעלה · מקביליות · תכנות ברמה נמוכה</span>
+        </div>
+        <a href="#" class="row-see-all">הצג הכל <span>›</span></a>
+      </div>
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" aria-label="גלול ימינה">›</button>
+        <div class="carousel">
+
+          <article class="card" style="--accent: #9333ea;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #0f0a1a 0%, #2a0f3d 100%);">
+              <div class="thumb-icon">🐚</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">מעטפת מינימלית (mysh)</h3>
+              <p class="card-student"><span class="student-icon">👤</span> רון פרידמן</p>
+              <p class="card-desc">מעטפת תואמת POSIX עם צינורות, הפניית קלט/פלט, עבודות רקע וטיפול בסיגנלים.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #9333ea;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #1a0a0f 0%, #3d0f2a 100%);">
+              <div class="thumb-icon">🧵</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">ספריית מאגר חוטים</h3>
+              <p class="card-student"><span class="student-icon">👤</span> לאה שטרן</p>
+              <p class="card-desc">מאגר חוטים עם גנבת עבודה ופרימיטיבי סנכרון מבוססי mutex ומשתני תנאי.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #9333ea;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #0a1a10 0%, #0f3d20 100%);">
+              <div class="thumb-icon">💾</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">מקצה זיכרון מותאם</h3>
+              <p class="card-student"><span class="student-icon">👤</span> ארז ביטון</p>
+              <p class="card-desc">מימוש malloc/free מותאם עם אסטרטגיות first-fit, best-fit ו-buddy-system.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #9333ea;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #1a100a 0%, #3d2a0f 100%);">
+              <div class="thumb-icon">🔒</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">גלאי מצבי מבוי סתום</h3>
+              <p class="card-student"><span class="student-icon">👤</span> הילה גרוס</p>
+              <p class="card-desc">גילוי deadlock בזמן ריצה מבוסס גרף הקצאת משאבים עם דיווח מחזורים.</p>
+            </div>
+          </article>
+
+        </div>
+        <button class="carousel-btn next" aria-label="גלול שמאלה">‹</button>
+      </div>
+    </div>
+
+    <!-- שורה 4: פיתוח ווב -->
+    <div class="row-section">
+      <div class="row-header">
+        <div class="row-header-left">
+          <h2 class="row-title">פיתוח ווב</h2>
+          <span class="row-subtitle">פול-סטאק · ממשקי API · אפליקציות בזמן אמת</span>
+        </div>
+        <a href="#" class="row-see-all">הצג הכל <span>›</span></a>
+      </div>
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" aria-label="גלול ימינה">›</button>
+        <div class="carousel">
+
+          <article class="card" style="--accent: #f59e0b;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #1a150a 0%, #3d2f0f 100%);">
+              <div class="thumb-icon">🛍️</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">פלטפורמת מסחר אלקטרוני</h3>
+              <p class="card-student"><span class="student-icon">👤</span> דור לוי</p>
+              <p class="card-desc">חנות פול-סטאק עם React, Node.js ו-MongoDB. אימות JWT ואינטגרציית תשלומי Stripe.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #f59e0b;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #0a1015 0%, #0f2030 100%);">
+              <div class="thumb-icon">💬</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">אפליקציית צ'אט בזמן אמת</h3>
+              <p class="card-student"><span class="student-icon">👤</span> שירה וייס</p>
+              <p class="card-desc">צ'אט רב-חדרי עם WebSockets, אינדיקטורי נוכחות מקוונת והיסטוריית הודעות.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #f59e0b;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #0f0a1a 0%, #280f3d 100%);">
+              <div class="thumb-icon">📊</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">לוח בקרה אנליטי</h3>
+              <p class="card-student"><span class="student-icon">👤</span> גל הכהן</p>
+              <p class="card-desc">לוח D3.js אינטראקטיבי הצורך REST API עם סינון חי, drill-down וייצוא CSV.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #f59e0b;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #0a1a0a 0%, #1a3d1a 100%);">
+              <div class="thumb-icon">📝</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">מנוע בלוג Markdown</h3>
+              <p class="card-student"><span class="student-icon">👤</span> עומר כהן</p>
+              <p class="card-desc">גנרטור אתרים סטטי שמקמפל Markdown ל-HTML עם הדגשת תחביר ותמיכת SEO.</p>
+            </div>
+          </article>
+
+        </div>
+        <button class="carousel-btn next" aria-label="גלול שמאלה">‹</button>
+      </div>
+    </div>
+
+    <!-- שורה 5: מערכות מסדי נתונים -->
+    <div class="row-section">
+      <div class="row-header">
+        <div class="row-header-left">
+          <h2 class="row-title">מערכות מסדי נתונים</h2>
+          <span class="row-subtitle">רלציוני · NoSQL · אופטימיזציית שאילתות</span>
+        </div>
+        <a href="#" class="row-see-all">הצג הכל <span>›</span></a>
+      </div>
+      <div class="carousel-wrapper">
+        <button class="carousel-btn prev" aria-label="גלול ימינה">›</button>
+        <div class="carousel">
+
+          <article class="card" style="--accent: #10b981;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #0a1a10 0%, #0f3d20 100%);">
+              <div class="thumb-icon">🏥</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">סכמת מסד נתונים לבית חולים</h3>
+              <p class="card-student"><span class="student-icon">👤</span> מיכל לוי</p>
+              <p class="card-desc">סכמה רלציונית מנורמלת (3NF) למערכת ניהול בית חולים עם פרוצדורות מאוחסנות.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #10b981;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #1a0a10 0%, #3d0f20 100%);">
+              <div class="thumb-icon">🔄</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">מסגרת ORM מינימלית</h3>
+              <p class="card-student"><span class="student-icon">👤</span> נועם בר</p>
+              <p class="card-desc">ORM Python קל-משקל הממפה מחלקות לטבלאות SQL עם טעינה עצלה ותמיכה ביחסים.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #10b981;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #0a0f1a 0%, #0f203d 100%);">
+              <div class="thumb-icon">📈</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">מחקר אופטימיזציית שאילתות</h3>
+              <p class="card-student"><span class="student-icon">👤</span> רינה קורן</p>
+              <p class="card-desc">ניתוח תוכניות שאילתות מבוסס עלויות ב-PostgreSQL עם היוריסטיקות לבחירת אינדקסים.</p>
+            </div>
+          </article>
+
+        </div>
+        <button class="carousel-btn next" aria-label="גלול שמאלה">‹</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ───────────────────────── צור קשר ───────────────────────── -->
+  <section id="contact" class="contact-section">
+    <div class="contact-inner">
+      <span class="section-label">צור קשר</span>
+      <h2 class="contact-heading">פנייה למחלקת מדעי המחשב</h2>
+      <p class="contact-sub">
+        שאלות על פרויקטים, הגשות או התוכנית האקדמית? פנו אלינו ישירות.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:cs@ono.ac.il" class="contact-card">
+          <div class="contact-icon">✉</div>
+          <div>
+            <strong>דוא"ל</strong>
+            <p>cs@ono.ac.il</p>
+          </div>
+        </a>
+        <a href="#" class="contact-card">
+          <div class="contact-icon">🌐</div>
+          <div>
+            <strong>אתר המכללה</strong>
+            <p>www.ono.ac.il</p>
+          </div>
+        </a>
+        <a href="#" class="contact-card">
+          <div class="contact-icon">📍</div>
+          <div>
+            <strong>מיקום</strong>
+            <p>קריית אונו, ישראל</p>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Carousel scroll logic — RTL-aware
+    document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
+      const carousel = wrapper.querySelector('.carousel');
+      const prevBtn  = wrapper.querySelector('.carousel-btn.prev');
+      const nextBtn  = wrapper.querySelector('.carousel-btn.next');
+      const scrollAmt = 340;
+
+      nextBtn.addEventListener('click', () => {
+        carousel.scrollBy({ left: -scrollAmt, behavior: 'smooth' });
+      });
+      prevBtn.addEventListener('click', () => {
+        carousel.scrollBy({ left: scrollAmt, behavior: 'smooth' });
+      });
+
+      const updateBtns = () => {
+        const sl = carousel.scrollLeft;
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+        const norm = sl <= 0 ? Math.abs(sl) : (maxScroll - sl);
+
+        prevBtn.style.opacity       = norm <= 1 ? '0' : '1';
+        prevBtn.style.pointerEvents = norm <= 1 ? 'none' : 'auto';
+        const atEnd = norm >= maxScroll - 4;
+        nextBtn.style.opacity       = atEnd ? '0' : '1';
+        nextBtn.style.pointerEvents = atEnd ? 'none' : 'auto';
+      };
+      carousel.addEventListener('scroll', updateBtns);
+      updateBtns();
+    });
+
+    // Navbar shrink on scroll
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+  </script>
+</body>
+</html>
