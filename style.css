@@ -122,8 +122,8 @@ a {
   position: relative;
   min-height: 100vh;
   display: flex;
-  align-items: center;          /* true vertical centering of both columns */
-  padding: 5rem 4% 3rem;        /* 5rem top clears the fixed navbar         */
+  align-items: center;
+  padding: 5rem 4% 3rem;
   overflow: hidden;
 }
 
@@ -168,7 +168,6 @@ a {
   max-width: 560px;
   flex: 1;
   padding-top: 0;
-  /* Pull the title up to align with the top of the code window */
   margin-top: -2rem;
 }
 
@@ -203,17 +202,52 @@ a {
 }
 
 .hero-title {
-  font-size: clamp(2rem, 5vw, 3.75rem);
-  font-weight: 900;
-  line-height: 1.1;
-  letter-spacing: 0;           /* Hebrew text needs no letter-spacing */
+  font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
+  font-size: clamp(1.9rem, 4.8vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
   margin-bottom: 0.5rem;
-  color: #fff;
-  /* direction and text-align inherited from html[dir="rtl"] */
+  color: #e8ffe8;
+  text-shadow: 0 0 6px rgba(46, 204, 113, 0.2);
 }
 
+/* First line — institution name, slightly smaller and softer */
+.title-line {
+  display: block;
+}
+
+.title-line--sub {
+  font-size: 0.62em;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: none;
+  margin-bottom: 0.15em;
+  letter-spacing: 0.01em;
+}
+
+/* Second line — department name, full neon glow */
 .title-accent {
-  color: var(--accent-red);
+  color: #2ecc71;
+  text-shadow:
+    0 0 6px  rgba(46, 204, 113, 1),
+    0 0 18px rgba(46, 204, 113, 0.7),
+    0 0 40px rgba(46, 204, 113, 0.35),
+    0 0 70px rgba(46, 204, 113, 0.15);
+}
+
+/* Blinking terminal cursor on the accent line */
+.title-cursor {
+  display: inline-block;
+  color: #2ecc71;
+  font-weight: 400;
+  animation: cursorBlink 1s step-end infinite;
+  margin-right: 2px;
+}
+
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }
 
 .hero-meta {
@@ -261,8 +295,9 @@ a {
   background: rgba(255,255,255,0.04);
 }
 
-/* English portal subtitle below the Hebrew title */
+/* Portal subtitle below the code title — uses Inter, not monospace */
 .hero-portal-subtitle {
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.08em;
@@ -389,6 +424,7 @@ a {
 .code-block .fn  { color: #1abc9c; }          /* teal           — functions   */
 .code-block .num { color: #f39c12; }          /* orange         — literals    */
 .code-block .cmt { color: #4a5568; font-style: italic; } /* muted — comments */
+
 
 /* ──────────── SCROLL INDICATOR ──────────── */
 .hero-scroll-indicator {
@@ -756,7 +792,6 @@ a {
     padding-top: 2rem;
     max-width: 100%;
   }
-
 }
 
 @media (max-width: 600px) {
