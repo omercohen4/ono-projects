@@ -46,17 +46,17 @@
           <span class="dot-green"></span>
           <span class="window-title">bsearch.cpp</span>
         </div>
-        <pre class="code-block"><span class="cmt">// ── Recursive Binary Search ─────────</span>
-<span class="kw">int</span> <span class="fn">bsearch</span>(<span class="kw">int</span>* arr,
-            <span class="kw">int</span> lo, <span class="kw">int</span> hi,
-            <span class="kw">int</span> key) {
-  <span class="kw">if</span> (lo &gt; hi) <span class="kw">return</span> -<span class="num">1</span>;
-  <span class="kw">int</span> mid = lo + (hi - lo) / <span class="num">2</span>;
-  <span class="kw">if</span> (arr[mid] == key) <span class="kw">return</span> mid;
-  <span class="kw">return</span> (arr[mid] &lt; key)
-    ? <span class="fn">bsearch</span>(arr, mid+<span class="num">1</span>, hi,  key)
-    : <span class="fn">bsearch</span>(arr, lo,  mid-<span class="num">1</span>, key);
-}</pre>
+        <pre class="code-block"><span class="code-comment">// ── Recursive Binary Search ─────────</span>
+<span class="code-type">int</span> <span class="code-function">bsearch</span><span class="code-operator">(</span><span class="code-type">int</span><span class="code-operator">*</span> <span class="code-variable">arr</span><span class="code-operator">,</span>
+            <span class="code-type">int</span> <span class="code-variable">lo</span><span class="code-operator">,</span> <span class="code-type">int</span> <span class="code-variable">hi</span><span class="code-operator">,</span>
+            <span class="code-type">int</span> <span class="code-variable">key</span><span class="code-operator">) {</span>
+  <span class="code-keyword">if</span> <span class="code-operator">(</span><span class="code-variable">lo</span> <span class="code-operator">&gt;</span> <span class="code-variable">hi</span><span class="code-operator">)</span> <span class="code-keyword">return</span> <span class="code-number">-1</span><span class="code-operator">;</span>
+  <span class="code-type">int</span> <span class="code-variable">mid</span> <span class="code-operator">=</span> <span class="code-variable">lo</span> <span class="code-operator">+</span> <span class="code-operator">(</span><span class="code-variable">hi</span> <span class="code-operator">-</span> <span class="code-variable">lo</span><span class="code-operator">)</span> <span class="code-operator">/</span> <span class="code-number">2</span><span class="code-operator">;</span>
+  <span class="code-keyword">if</span> <span class="code-operator">(</span><span class="code-variable">arr</span><span class="code-operator">[</span><span class="code-variable">mid</span><span class="code-operator">]</span> <span class="code-operator">==</span> <span class="code-variable">key</span><span class="code-operator">)</span> <span class="code-keyword">return</span> <span class="code-variable">mid</span><span class="code-operator">;</span>
+  <span class="code-keyword">return</span> <span class="code-operator">(</span><span class="code-variable">arr</span><span class="code-operator">[</span><span class="code-variable">mid</span><span class="code-operator">]</span> <span class="code-operator">&lt;</span> <span class="code-variable">key</span><span class="code-operator">)</span>
+    <span class="code-operator">?</span> <span class="code-function">bsearch</span><span class="code-operator">(</span><span class="code-variable">arr</span><span class="code-operator">,</span> <span class="code-variable">mid</span><span class="code-operator">+</span><span class="code-number">1</span><span class="code-operator">,</span> <span class="code-variable">hi</span><span class="code-operator">,</span>  <span class="code-variable">key</span><span class="code-operator">)</span>
+    <span class="code-operator">:</span> <span class="code-function">bsearch</span><span class="code-operator">(</span><span class="code-variable">arr</span><span class="code-operator">,</span> <span class="code-variable">lo</span><span class="code-operator">,</span>  <span class="code-variable">mid</span><span class="code-operator">-</span><span class="code-number">1</span><span class="code-operator">,</span> <span class="code-variable">key</span><span class="code-operator">);</span>
+<span class="code-operator">}</span></pre>
       </div>
       <div class="hero-featured-label">
         <span class="featured-dot"></span>
@@ -80,7 +80,7 @@
           <h2 class="row-title">בינה מלאכותית</h2>
           <span class="row-subtitle">למידת מכונה · למידה עמוקה · עיבוד שפה טבעית</span>
         </div>
-        <a href="#" class="row-see-all">הצג הכל <span>›</span></a>
+
       </div>
       <div class="carousel-wrapper">
         <button class="carousel-btn prev" aria-label="גלול ימינה">›</button>
@@ -197,7 +197,7 @@
           <h2 class="row-title">אלגוריתמים ומבני נתונים</h2>
           <span class="row-subtitle">סיבוכיות · תורת גרפים · אופטימיזציה</span>
         </div>
-        <a href="#" class="row-see-all">הצג הכל <span>›</span></a>
+
       </div>
       <div class="carousel-wrapper">
         <button class="carousel-btn prev" aria-label="גלול ימינה">›</button>
@@ -259,7 +259,7 @@
           <h2 class="row-title">תכנות מערכות</h2>
           <span class="row-subtitle">מערכות הפעלה · מקביליות · תכנות ברמה נמוכה</span>
         </div>
-        <a href="#" class="row-see-all">הצג הכל <span>›</span></a>
+
       </div>
       <div class="carousel-wrapper">
         <button class="carousel-btn prev" aria-label="גלול ימינה">›</button>
@@ -321,7 +321,7 @@
           <h2 class="row-title">פיתוח ווב</h2>
           <span class="row-subtitle">פול-סטאק · ממשקי API · אפליקציות בזמן אמת</span>
         </div>
-        <a href="#" class="row-see-all">הצג הכל <span>›</span></a>
+
       </div>
       <div class="carousel-wrapper">
         <button class="carousel-btn prev" aria-label="גלול ימינה">›</button>
@@ -383,7 +383,7 @@
           <h2 class="row-title">מערכות מסדי נתונים</h2>
           <span class="row-subtitle">רלציוני · NoSQL · אופטימיזציית שאילתות</span>
         </div>
-        <a href="#" class="row-see-all">הצג הכל <span>›</span></a>
+
       </div>
       <div class="carousel-wrapper">
         <button class="carousel-btn prev" aria-label="גלול ימינה">›</button>

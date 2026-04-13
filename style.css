@@ -425,6 +425,15 @@ a {
 .code-block .num { color: #f39c12; }          /* orange         — literals    */
 .code-block .cmt { color: #4a5568; font-style: italic; } /* muted — comments */
 
+/* ── Rich syntax highlighting — C++ bsearch ── */
+.code-block .code-keyword  { color: #569cd6; }                        /* blue  — if, return       */
+.code-block .code-type     { color: #4ec9b0; }                        /* teal  — int              */
+.code-block .code-function { color: #ffffff; font-weight: 600; }      /* white — function name    */
+.code-block .code-variable { color: #d4d4d4; }                        /* light gray — parameters  */
+.code-block .code-number   { color: #d19a66; }                        /* orange — numeric literals */
+.code-block .code-operator { color: #abb2bf; }                        /* gray  — punctuation      */
+.code-block .code-comment  { color: #4a7a4a; font-style: italic; }   /* dim green — comment line */
+
 
 /* ──────────── SCROLL INDICATOR ──────────── */
 .hero-scroll-indicator {
@@ -522,9 +531,6 @@ a {
 }
 
 .row-header {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
   padding: 0 4%;
   margin-bottom: 1rem;
 }
@@ -549,19 +555,6 @@ a {
   color: var(--text-muted);
 }
 
-.row-see-all {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  transition: color var(--transition);
-  letter-spacing: 0.04em;
-}
-.row-see-all:hover {
-  color: var(--text-primary);
-}
-.row-see-all span {
-  font-size: 1rem;
-}
 
 /* ──────────── CAROUSEL ──────────── */
 .carousel-wrapper {
