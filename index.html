@@ -130,6 +130,61 @@
             </div>
           </article>
 
+          <article class="card" style="--accent: #27ae60;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #1a0a10 0%, #3d0f25 100%);">
+              <div class="thumb-icon">😄</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">מערכת לזיהוי רגשות בזמן אמת</h3>
+              <p class="card-student"><span class="student-icon">👤</span> יובל אברהם</p>
+              <p class="card-desc">זיהוי רגשות פנים בזמן אמת באמצעות OpenCV ו-FER+ עם דיוק של 87% על וידאו חי.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #27ae60;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #0a1015 0%, #0f2535 100%);">
+              <div class="thumb-icon">🏥</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">צ'אטבוט רפואי מבוסס NLP</h3>
+              <p class="card-student"><span class="student-icon">👤</span> אור שלום</p>
+              <p class="card-desc">בוט שיח רפואי בעברית המבוסס על GPT-2 מכוון-תחום עם מסד ידע של תסמינים ואבחנות.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #27ae60;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #0f1a0a 0%, #253d0f 100%);">
+              <div class="thumb-icon">🏠</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">חיזוי מחירי נדל"ן</h3>
+              <p class="card-student"><span class="student-icon">👤</span> גיא מנחם</p>
+              <p class="card-desc">מודל רגרסיה מבוסס רשת עצבית לחיזוי מחירי דירות בישראל עם שגיאת RMSE של 4.2%.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #27ae60;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #1a0a1a 0%, #350f3d 100%);">
+              <div class="thumb-icon">🎵</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">מערכת המלצות מוזיקה אישית</h3>
+              <p class="card-student"><span class="student-icon">👤</span> דנה רוזן</p>
+              <p class="card-desc">מנוע המלצות היברידי המשלב סינון שיתופי ותוכן אודיו עם Spotify API.</p>
+            </div>
+          </article>
+
+          <article class="card" style="--accent: #27ae60;">
+            <div class="card-thumb" style="background: linear-gradient(135deg, #0a0f1a 0%, #0f1a35 100%);">
+              <div class="thumb-icon">✍️</div>
+            </div>
+            <div class="card-info">
+              <h3 class="card-title">זיהוי כתב יד בעברית</h3>
+              <p class="card-student"><span class="student-icon">👤</span> ליאור בן-עמי</p>
+              <p class="card-desc">רשת CNN מותאמת לזיהוי אותיות עבריות בכתב יד עם דיוק 94% על מאגר נתונים ייעודי.</p>
+            </div>
+          </article>
+
         </div>
         <button class="carousel-btn next" aria-label="גלול שמאלה">‹</button>
       </div>
@@ -416,11 +471,13 @@
       const nextBtn  = wrapper.querySelector('.carousel-btn.next');
       const scrollAmt = 340;
 
-      nextBtn.addEventListener('click', () => {
-        carousel.scrollBy({ left: -scrollAmt, behavior: 'smooth' });
-      });
+      // Right button: scroll right (go back toward start)
       prevBtn.addEventListener('click', () => {
         carousel.scrollBy({ left: scrollAmt, behavior: 'smooth' });
+      });
+      // Left button: scroll left (advance to more cards)
+      nextBtn.addEventListener('click', () => {
+        carousel.scrollBy({ left: -scrollAmt, behavior: 'smooth' });
       });
 
       const updateBtns = () => {
@@ -428,8 +485,10 @@
         const maxScroll = carousel.scrollWidth - carousel.clientWidth;
         const norm = sl <= 0 ? Math.abs(sl) : (maxScroll - sl);
 
+        // Hide right (prev) button when at the rightmost start position
         prevBtn.style.opacity       = norm <= 1 ? '0' : '1';
         prevBtn.style.pointerEvents = norm <= 1 ? 'none' : 'auto';
+        // Hide left (next) button when scrolled all the way to the left end
         const atEnd = norm >= maxScroll - 4;
         nextBtn.style.opacity       = atEnd ? '0' : '1';
         nextBtn.style.pointerEvents = atEnd ? 'none' : 'auto';
