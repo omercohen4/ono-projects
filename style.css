@@ -1,50 +1,36 @@
-/* ══════════════════════════════════════════════════
-   RESET & BASE
-   Strips browser default margins/padding from every
-   element and forces consistent box-sizing.
-══════════════════════════════════════════════════ */
+/* RESET */
 *, *::before, *::after {
-  box-sizing: border-box; /* padding and border included in element width */
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* ══════════════════════════════════════════════════
-   DESIGN TOKENS (CSS Custom Properties)
-   Central place for all reusable values.
+/*
+   DESIGN TOKENS
    Change a value here and it updates everywhere.
-══════════════════════════════════════════════════ */
+ */
 :root {
-  /* Background layers — darkest to lightest */
-  --bg-base:       #0a0a0a; /* page background (near black) */
-  --bg-surface:    #111111; /* slightly lighter surface */
-  --bg-card:       #181818; /* project card background */
-  --bg-card-hover: #222222; /* card background on hover */
+  --bg-base:       #0a0a0a;
+  --bg-surface:    #111111;
+  --bg-card:       #181818;
+  --bg-card-hover: #222222;
 
-  /* Accent colors — primary green theme */
-  --accent-red:    #27ae60; /* named "red" historically, now green (main accent) */
-  --accent-blue:   #0070f3; /* blue accent used by algorithm cards */
+  /* Named "red" historically — it's actually the main green accent */
+  --accent-red:    #27ae60;
+  --accent-blue:   #0070f3;
 
-  /* Text hierarchy */
-  --text-primary:  #ffffff; /* headings and important text */
-  --text-secondary:#b3b3b3; /* body text and descriptions */
-  --text-muted:    #666666; /* timestamps, subtitles, labels */
+  --text-primary:   #ffffff;
+  --text-secondary: #b3b3b3;
+  --text-muted:     #666666;
 
-  /* Borders and separators */
-  --border:        rgba(255,255,255,0.07); /* very subtle white line */
-
-  /* Shared border radii */
+  --border:        rgba(255, 255, 255, 0.07);
   --radius-card:   8px;
   --radius-btn:    6px;
-
-  /* Default font stack */
   --font:          'Inter', system-ui, -apple-system, sans-serif;
-
-  /* Shared animation easing — smooth acceleration/deceleration */
   --transition:    0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Enables smooth anchor-link scrolling (e.g., clicking nav links) */
+/* BASE */
 html {
   scroll-behavior: smooth;
 }
@@ -54,49 +40,40 @@ body {
   background-color: var(--bg-base);
   color: var(--text-primary);
   line-height: 1.6;
-  overflow-x: hidden; /* prevents horizontal page scroll from card animations */
+  overflow-x: hidden;
 }
 
-/* Remove underlines from all links by default */
 a {
   text-decoration: none;
   color: inherit;
 }
 
-/* ══════════════════════════════════════════════════
-   NAVIGATION BAR
-   Fixed to the top of the viewport so it's always
-   visible while scrolling. Uses flexbox to separate
-   the logo (right side, RTL start) from the links
-   (left side, RTL end).
-══════════════════════════════════════════════════ */
+/* NAVIGATION */
 .navbar {
-  position: fixed;   /* stays at the top when user scrolls */
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 100;      /* above all page content */
+  z-index: 100;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.65rem 4%;
   background: #000000;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  transition: padding var(--transition); /* smooth shrink when scrolled */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: padding var(--transition);
 }
 
-/* When the user scrolls down 60px, JS adds this class.
-   The reduced padding makes the navbar feel thinner/compact. */
+/* JS adds this class after 60px of scroll — gives the nav a slimmer feel */
 .navbar.scrolled {
-  background: #000000;
   padding: 0.5rem 4%;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 .nav-logo {
   display: flex;
   align-items: center;
-  flex-shrink: 0; /* prevents logo from shrinking when links take up space */
+  flex-shrink: 0;
 }
 
 .nav-logo-img {
@@ -104,28 +81,19 @@ a {
   width: auto;
   display: block;
   object-fit: contain;
-  /* mix-blend-mode: screen removes white/light pixels from the PNG logo.
-     On a black background, white becomes invisible — only the colored
-     parts of the logo remain visible. No need to use a transparent PNG. */
+  /* mix-blend-mode: screen makes the white PNG background invisible on black —
+     only the colored parts of the logo show through */
   mix-blend-mode: screen;
-  /* Keeps the logo sharp on Retina / high-DPI displays */
   image-rendering: -webkit-optimize-contrast;
   transition: opacity 0.2s ease;
-  border: none;
-  outline: none;
-  background: transparent;
 }
 
-/* Subtle dim on hover for interactivity feedback */
 .nav-logo-img:hover {
   opacity: 0.85;
 }
 
-/* On small phones, shrink the logo so it doesn't crowd the nav */
 @media (max-width: 600px) {
-  .nav-logo-img {
-    height: 50px;
-  }
+  .nav-logo-img { height: 50px; }
 }
 
 .nav-links {
@@ -137,124 +105,77 @@ a {
 .nav-links a {
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--text-secondary); /* dimmed by default */
+  color: var(--text-secondary);
   transition: color var(--transition);
   letter-spacing: 0.02em;
 }
 
-/* Brighten link text on hover */
 .nav-links a:hover {
   color: var(--text-primary);
 }
 
-/* ══════════════════════════════════════════════════
-   HERO SECTION
-   Full-viewport two-column layout (RTL):
-     Right column: department title + subtitle
-     Left column:  animated code editor window
-   Three stacked background layers create the cinematic look.
-══════════════════════════════════════════════════ */
+/*
+   HERO — two-column full-viewport layout
+   Right col: title + subtitle
+   Left col:  decorative code window
+ */
 .hero {
   position: relative;
-  min-height: 100vh;    /* fills the whole screen height */
+  min-height: 100vh;
   display: flex;
-  align-items: center;  /* vertically centers both columns */
-  padding: 5rem 4% 3rem; /* 5rem top padding clears the fixed navbar */
+  align-items: center;
+  padding: 5rem 4% 3rem; /* top padding clears the fixed navbar */
   overflow: hidden;
 }
 
-/* Wrapper for all background layers — sits behind content (z-index 0) */
+/* Background container — sits behind all content */
 .hero-bg {
   position: absolute;
   inset: 0;
   z-index: 0;
 }
 
-/* Three-layer gradient overlay that creates the cinematic dark effect:
-   Layer 1 (to left):   darkens the RIGHT side where the title lives,
-                        fades out toward the LEFT (code window side)
-   Layer 2 (to top):    solid black at the very bottom, fades up
-   Layer 3 (to bottom): semi-dark at the very top, fades down
-   Together they create a "spotlight" effect around the content. */
+/* Three-layer gradient that darkens the right side (title area)
+   and creates a cinematic vignette around the edges */
 .hero-overlay {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to left,   rgba(10,10,10,0.97) 30%, rgba(10,10,10,0.5) 60%, rgba(10,10,10,0.2) 100%),
-    linear-gradient(to top,    rgba(10,10,10,1)    0%,  transparent 40%),
-    linear-gradient(to bottom, rgba(10,10,10,0.6)  0%,  transparent 25%);
+    linear-gradient(to left,   rgba(10, 10, 10, 0.97) 30%, rgba(10, 10, 10, 0.5) 60%, rgba(10, 10, 10, 0.2) 100%),
+    linear-gradient(to top,    rgba(10, 10, 10, 1)    0%,  transparent 40%),
+    linear-gradient(to bottom, rgba(10, 10, 10, 0.6)  0%,  transparent 25%);
   z-index: 1;
 }
 
-/* Subtle animated green grid that drifts diagonally in the background.
-   Very low opacity (0.04) so it's barely visible — just adds texture. */
+/* Subtle animated green grid — barely visible at 4% opacity, just adds texture */
 .hero-grid-bg {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(39,174,96,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(39,174,96,0.04) 1px, transparent 1px);
+    linear-gradient(rgba(39, 174, 96, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(39, 174, 96, 0.04) 1px, transparent 1px);
   background-size: 60px 60px;
-  background-position: center center;
-  animation: gridDrift 30s linear infinite; /* slow continuous drift */
+  animation: gridDrift 30s linear infinite;
   z-index: 0;
 }
 
-/* Moves the grid one full tile diagonally over 30 seconds,
-   then loops seamlessly (the start and end positions are the same tile) */
+/* Shift one full tile diagonally — loops seamlessly because tile start = tile end */
 @keyframes gridDrift {
-  0%   { background-position: 0 0; }
-  100% { background-position: 60px 60px; }
+  from { background-position: 0 0; }
+  to   { background-position: 60px 60px; }
 }
 
-/* RIGHT COLUMN — contains the title and subtitle.
-   margin-top: -2rem nudges it slightly upward to
-   visually align with the top of the code window. */
+/* Right column — title content */
 .hero-content {
   position: relative;
   z-index: 2;
   max-width: 560px;
-  flex: 1;             /* takes all remaining space after the code window */
-  padding-top: 0;
-  margin-top: -2rem;
+  flex: 1;
+  margin-top: -2rem; /* nudges title up to visually align with the code window */
 }
 
-/* Unused badge element (kept for potential future use) */
-.hero-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent-red);
-  margin-bottom: 1rem;
-  padding: 0.3rem 0.75rem;
-  border: 1px solid rgba(39,174,96,0.35);
-  border-radius: 4px;
-  background: rgba(39,174,96,0.08);
-}
-
-/* Pulsing green dot before the badge */
-.hero-badge::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent-red);
-  animation: pulse 2s infinite;
-}
-
-/* Breathe animation for pulsing dots */
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.4; transform: scale(0.8); }
-}
-
-/* Main heading — uses Fira Code (monospace) for a code-like appearance.
-   clamp() makes the font size fluid: min 1.9rem, ideal 4.8vw, max 3.6rem.
-   A faint green glow ties the title visually to the code window. */
+/* Monospace title for a code-aesthetic look.
+   clamp() keeps the size fluid across breakpoints. */
 .hero-title {
   font-family: 'Fira Code', 'Roboto Mono', 'Courier New', monospace;
   font-size: clamp(1.9rem, 4.8vw, 3.6rem);
@@ -262,31 +183,26 @@ a {
   line-height: 1.2;
   letter-spacing: -0.01em;
   margin-bottom: 0.5rem;
-  color: #e8ffe8; /* near-white with a very subtle green tint */
-  text-shadow: 0 0 6px rgba(46, 204, 113, 0.2); /* soft green ambient glow */
+  color: #e8ffe8;
+  text-shadow: 0 0 6px rgba(46, 204, 113, 0.2);
 }
 
-/* Each line of the title is a block element so they stack vertically */
 .title-line {
   display: block;
 }
 
-/* First line: institution name — smaller, softer, acts like a label */
+/* First line — institution name, treated like a dimmed label */
 .title-line--sub {
-  font-size: 0.62em;      /* 62% of the parent .hero-title size */
+  font-size: 0.62em;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.7); /* semi-transparent white */
+  color: rgba(255, 255, 255, 0.7);
   text-shadow: none;
   margin-bottom: 0.15em;
   letter-spacing: 0.01em;
 }
 
-/* Second line: department name — full neon green glow.
-   Four text-shadow layers create depth:
-   1. Tight bright core glow
-   2. Medium spread glow
-   3. Wide soft glow
-   4. Very wide ambient glow */
+/* Second line — department name with a multi-layer neon glow.
+   Four shadow layers: tight core → medium spread → wide soft → ambient */
 .title-accent {
   color: #2ecc71;
   text-shadow:
@@ -296,8 +212,7 @@ a {
     0 0 70px rgba(46, 204, 113, 0.15);
 }
 
-/* Blinking underscore at the end of "מדעי המחשב".
-   Uses step-end (not linear) so it snaps on/off like a real terminal cursor. */
+/* Blinking terminal cursor — step-end makes it snap on/off instead of fading */
 .title-cursor {
   display: inline-block;
   color: #2ecc71;
@@ -307,105 +222,84 @@ a {
 }
 
 @keyframes cursorBlink {
-  0%, 100% { opacity: 1; } /* visible */
-  50%       { opacity: 0; } /* invisible */
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
 }
 
-/* Unused metadata elements (kept for potential future use) */
-.hero-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
-  margin-bottom: 1.25rem;
-}
-
-.hero-tag {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  background: rgba(255,255,255,0.07);
-  border: 1px solid var(--border);
-  padding: 0.2rem 0.6rem;
-  border-radius: 4px;
-  letter-spacing: 0.04em;
-}
-
-.hero-year {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  margin-left: 0.25rem;
-}
-
-/* Unused institution badge (kept for potential future use) */
-.hero-institution {
-  margin-bottom: 1rem;
-}
-
-.hero-institution-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-  padding: 0.3rem 0.85rem;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  background: rgba(255,255,255,0.04);
-}
-
-/* Subtitle below the title — uses Inter (not monospace) to contrast
-   with the Fira Code title and feel like a clean informational label. */
+/* Tagline below the title — uses Inter (not monospace) to contrast with the heading */
 .hero-portal-subtitle {
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--accent-red); /* green accent color */
+  color: var(--accent-red);
   margin-bottom: 1.25rem;
 }
 
-/* Unused hero stats strip (kept for potential future use) */
-.hero-stats {
+/* Left column — code window container.
+   margin-right: auto in RTL pushes this to the left edge of the flex row. */
+.hero-visual {
+  position: relative;
+  z-index: 2;
+  margin-right: auto;
+  flex-shrink: 0;
+}
+
+/* CODE WINDOW — macOS-style editor decoration */
+.code-window {
+  width: min(420px, 42vw);
+  background: rgba(20, 20, 20, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+/* Title bar with macOS traffic light dots */
+.window-bar {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: 6px;
+  padding: 0.75rem 1rem;
+  background: rgba(40, 40, 40, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.hero-stat {
-  display: flex;
-  flex-direction: column;
-}
+.dot-red    { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; }
+.dot-yellow { width: 12px; height: 12px; border-radius: 50%; background: #febc2e; }
+.dot-green  { width: 12px; height: 12px; border-radius: 50%; background: #28c840; }
 
-.stat-num {
-  font-size: 1.5rem;
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  color: #fff;
-  line-height: 1;
-}
-
-.stat-label {
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+/* Filename pushed to the far left of the title bar */
+.window-title {
+  margin-left: auto;
+  font-size: 0.7rem;
   color: var(--text-muted);
-  margin-top: 0.2rem;
+  letter-spacing: 0.04em;
 }
 
-.hero-stat-divider {
-  width: 1px;
-  height: 32px;
-  background: var(--border);
+/* Code content — white-space: pre preserves indentation exactly as written */
+.code-block {
+  padding: 1.25rem 1.5rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.82rem;
+  line-height: 1.8;
+  color: #abb2bf;
+  white-space: pre;
+  overflow-x: auto;
 }
 
-/* Small label shown below the code window with a pulsing green dot */
+/* VS Code One Dark Pro palette — each token type has a semantic class */
+.code-block .code-keyword  { color: #569cd6; }                      /* blue  — if, return      */
+.code-block .code-type     { color: #4ec9b0; }                      /* teal  — int             */
+.code-block .code-function { color: #ffffff; font-weight: 600; }    /* white — function name   */
+.code-block .code-variable { color: #d4d4d4; }                      /* gray  — parameters      */
+.code-block .code-number   { color: #d19a66; }                      /* amber — numeric literals */
+.code-block .code-operator { color: #abb2bf; }                      /* gray  — punctuation     */
+.code-block .code-comment  { color: #4a7a4a; font-style: italic; } /* dim green — comments    */
+
+/* Small label below the code window with a pulsing dot */
 .hero-featured-label {
   display: flex;
   align-items: center;
@@ -416,118 +310,25 @@ a {
   color: var(--text-muted);
 }
 
-/* The pulsing green dot in the featured label (reuses pulse animation) */
 .featured-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background: var(--accent-red);
-  flex-shrink: 0; /* never shrinks even if the label text is long */
+  flex-shrink: 0;
   animation: pulse 2s infinite;
 }
 
-/* Unused description paragraph (kept for potential future use) */
-.hero-description {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  line-height: 1.75;
-  margin-bottom: 2rem;
-  max-width: 480px;
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.8); }
 }
 
-/* ══════════════════════════════════════════
-   LEFT COLUMN (Code Window Container)
-   margin-right: auto pushes this element to
-   the LEFT side of the flex row.
-   In RTL, "right" is the start, so auto margin
-   on the right effectively left-aligns this column.
-══════════════════════════════════════════ */
-.hero-visual {
-  position: relative;
-  z-index: 2;
-  margin-right: auto; /* pushes the code window toward the left edge */
-  flex-shrink: 0;     /* prevents the code window from shrinking */
-  padding-top: 0;
-}
-
-/* The code editor window — styled like a macOS terminal.
-   backdrop-filter: blur adds a frosted glass effect on the dark background. */
-.code-window {
-  width: min(420px, 42vw); /* responsive: 420px on large screens, 42vw on smaller */
-  background: rgba(20, 20, 20, 0.9);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 10px;
-  overflow: hidden; /* clips the code block to the rounded corners */
-  box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-}
-
-/* Top bar of the code window — mimics macOS title bar */
-.window-bar {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 0.75rem 1rem;
-  background: rgba(40,40,40,0.8);
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-
-/* macOS traffic light buttons (purely decorative, no interaction) */
-.dot-red    { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; }
-.dot-yellow { width: 12px; height: 12px; border-radius: 50%; background: #febc2e; }
-.dot-green  { width: 12px; height: 12px; border-radius: 50%; background: #28c840; }
-
-/* Filename label — pushed to the far end with margin-left: auto */
-.window-title {
-  margin-left: auto; /* pushes the filename to the left side of the bar */
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  letter-spacing: 0.04em;
-}
-
-/* Code content area — uses monospace font for accurate character alignment.
-   white-space: pre preserves all indentation and newlines exactly as written.
-   overflow-x: auto adds a horizontal scrollbar if a line is too long. */
-.code-block {
-  padding: 1.25rem 1.5rem;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.82rem;
-  line-height: 1.8;
-  color: #abb2bf; /* default text color (medium gray) for unstyled tokens */
-  white-space: pre;
-  overflow-x: auto;
-}
-
-/* Legacy syntax classes (original simple highlighting — kept for compatibility) */
-.code-block .kw  { color: #2ecc71; }          /* vibrant green  — keywords   */
-.code-block .cls { color: #e5c07b; }          /* amber          — type names  */
-.code-block .fn  { color: #1abc9c; }          /* teal           — functions   */
-.code-block .num { color: #f39c12; }          /* orange         — literals    */
-.code-block .cmt { color: #4a5568; font-style: italic; } /* muted — comments */
-
-/* ── Rich syntax highlighting — C++ bsearch ──
-   Each token type has its own color, matching a VS Code One Dark Pro palette.
-   Applied via <span class="code-TYPE"> in index.html. */
-.code-block .code-keyword  { color: #569cd6; }                       /* blue  — if, return       */
-.code-block .code-type     { color: #4ec9b0; }                       /* teal  — int              */
-.code-block .code-function { color: #ffffff; font-weight: 600; }     /* white — function name    */
-.code-block .code-variable { color: #d4d4d4; }                       /* light gray — parameters  */
-.code-block .code-number   { color: #d19a66; }                       /* orange — numeric literals */
-.code-block .code-operator { color: #abb2bf; }                       /* gray  — punctuation      */
-.code-block .code-comment  { color: #4a7a4a; font-style: italic; }  /* dim green — comment line */
-
-
-/* ══════════════════════════════════════════
-   SCROLL INDICATOR
-   Absolute-positioned at the bottom-right of
-   the hero. The animated line pulses to hint
-   that the user should scroll down.
-══════════════════════════════════════════ */
+/* SCROLL INDICATOR — bottom-right of hero */
 .hero-scroll-indicator {
   position: absolute;
   bottom: 2.5rem;
-  right: 4%;   /* RTL: right = start side, so this sits near the title */
-  left: auto;
+  right: 4%;
   z-index: 2;
   display: flex;
   align-items: center;
@@ -538,113 +339,40 @@ a {
   color: var(--text-muted);
 }
 
-/* The animated line next to "גלול לגילוי" — scales in and out */
+/* The animated line pulses to draw the user's eye downward */
 .scroll-line {
   width: 40px;
   height: 1px;
-  background: var(--accent-red); /* green line */
+  background: var(--accent-red);
   transform-origin: left;
   animation: scrollLine 2s ease-in-out infinite;
 }
 
-/* Shrinks and fades the line, then restores it — draws the eye downward */
 @keyframes scrollLine {
   0%, 100% { transform: scaleX(1);   opacity: 1; }
   50%       { transform: scaleX(0.3); opacity: 0.4; }
 }
 
-/* ══════════════════════════════════════════════════
-   BUTTONS
-   General-purpose button styles.
-   Three variants: primary (green), secondary (glass),
-   ghost (transparent outline).
-   Not currently used in the live page but kept for
-   potential future UI additions.
-══════════════════════════════════════════════════ */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-btn);
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: all var(--transition);
-  white-space: nowrap;
-}
-
-/* Solid green button — primary call-to-action */
-.btn-primary {
-  background: var(--accent-red);
-  color: #fff;
-}
-.btn-primary:hover {
-  background: #219a52; /* slightly darker green on hover */
-  transform: translateY(-1px); /* lifts the button */
-  box-shadow: 0 8px 20px rgba(39,174,96,0.4); /* green glow shadow */
-}
-
-/* Frosted glass button — secondary action */
-.btn-secondary {
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.15);
-  backdrop-filter: blur(8px); /* glass blur effect */
-}
-.btn-secondary:hover {
-  background: rgba(255,255,255,0.18);
-  transform: translateY(-1px);
-}
-
-/* Transparent outline button — tertiary/ghost action */
-.btn-ghost {
-  background: transparent;
-  color: var(--text-secondary);
-  border: 1px solid var(--border);
-}
-.btn-ghost:hover {
-  color: #fff;
-  border-color: rgba(255,255,255,0.25);
-  background: rgba(255,255,255,0.05);
-}
-
-/* Wrapper for multiple hero action buttons side by side */
-.hero-actions {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap; /* wraps to next line on narrow screens */
-}
-
-/* ══════════════════════════════════════════════════
-   PROJECTS SECTION
-   Contains all carousel rows. Padded top and bottom
-   to create breathing room around the carousels.
-══════════════════════════════════════════════════ */
+/* PROJECT SECTION & CAROUSEL ROWS */
 .projects-section {
   padding: 2rem 0 4rem;
 }
 
-/* Each subject area (AI, Algorithms, etc.) is wrapped in .row-section */
 .row-section {
-  margin-bottom: 2.5rem; /* vertical space between carousel rows */
+  margin-bottom: 2.5rem;
 }
 
-/* Header above each carousel: title on the right, subtitle below it */
 .row-header {
-  padding: 0 4%;       /* matches the carousel's horizontal padding */
+  padding: 0 4%;
   margin-bottom: 1rem;
 }
 
-/* Stacks the title and subtitle vertically with a small gap */
 .row-header-left {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
 }
 
-/* Section title (e.g., "בינה מלאכותית") */
 .row-title {
   font-size: 1.35rem;
   font-weight: 700;
@@ -652,7 +380,6 @@ a {
   color: var(--text-primary);
 }
 
-/* Section subtitle (e.g., "למידת מכונה · למידה עמוקה") */
 .row-subtitle {
   font-size: 0.72rem;
   font-weight: 500;
@@ -660,49 +387,36 @@ a {
   color: var(--text-muted);
 }
 
-
-/* ══════════════════════════════════════════
-   CAROUSEL
-   Horizontal scrolling container.
-   Key properties:
-     display: flex       — cards laid out in a row
-     overflow-x: auto    — enables horizontal scroll
-     scroll-snap-type    — cards snap into position
-     scrollbar-width: none — hides the scrollbar (Firefox)
-   The nav buttons are positioned absolute within
-   .carousel-wrapper so they float over the card edges.
-══════════════════════════════════════════ */
+/* Carousel wrapper is the positioning anchor for the nav buttons */
 .carousel-wrapper {
-  position: relative; /* anchor for the absolute-positioned nav buttons */
+  position: relative;
 }
 
 .carousel {
   display: flex;
   gap: 1rem;
   padding: 0.5rem 4% 1.5rem;
-  overflow-x: auto;                   /* horizontal scroll enabled */
-  scroll-snap-type: x mandatory;      /* cards snap to position on scroll */
-  -webkit-overflow-scrolling: touch;  /* smooth momentum scroll on iOS */
-  scrollbar-width: none;              /* hides scrollbar in Firefox */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
-/* Hides the scrollbar in Chrome/Safari/Edge — scroll still works */
 .carousel::-webkit-scrollbar {
   display: none;
 }
 
-/* Navigation arrow buttons for the carousel.
-   z-index: 20 ensures they always appear above
-   project cards even when a card is scaled up on hover (z-index 10). */
+/* Arrow buttons float over the carousel edges.
+   z-index: 20 keeps them visible even when a card is scaled up on hover (z-index: 10). */
 .carousel-btn {
   position: absolute;
   top: 50%;
-  transform: translateY(-60%); /* slightly above center to align with card thumbnails */
-  z-index: 20;   /* must be > card hover z-index (10) so arrows stay visible */
+  transform: translateY(-60%);
+  z-index: 20;
   width: 44px;
   height: 80px;
   border: none;
-  background: rgba(10,10,10,0.85); /* semi-transparent dark background */
+  background: rgba(10, 10, 10, 0.85);
   color: #fff;
   font-size: 1.75rem;
   cursor: pointer;
@@ -712,69 +426,54 @@ a {
   border-radius: var(--radius-card);
   transition: opacity var(--transition), background var(--transition);
 }
+
 .carousel-btn:hover {
-  background: rgba(30,30,30,0.95); /* slightly more opaque on hover */
+  background: rgba(30, 30, 30, 0.95);
 }
 
-/* RTL carousel button positioning:
-   .prev (go back / scroll right)  → sits on the RIGHT edge
-   .next (advance / scroll left)   → sits on the LEFT edge
-   Border-radius is removed on the edge touching the carousel frame
-   so the button appears to grow out of the edge. */
+/* RTL positioning — prev (go back) on the right, next (advance) on the left.
+   The flat edge toward the carousel frame makes the button feel anchored. */
 .carousel-btn.prev { right: 0; left: auto;  border-radius: var(--radius-card) 0 0 var(--radius-card); }
 .carousel-btn.next { left: 0;  right: auto; border-radius: 0 var(--radius-card) var(--radius-card) 0; }
 
-/* ══════════════════════════════════════════════════
-   PROJECT CARDS
-   Fixed-width cards in a horizontal row.
-   On hover: scale up slightly + rise with a spring
-   animation (cubic-bezier with overshoot creates
-   the bouncy "pop" effect).
-══════════════════════════════════════════════════ */
+/* PROJECT CARDS */
 .card {
-  flex: 0 0 300px;     /* fixed 300px width, never shrinks or grows */
-  scroll-snap-align: start; /* snaps to the right edge (RTL start) */
+  flex: 0 0 300px;
+  scroll-snap-align: start;
   border-radius: var(--radius-card);
   background: var(--bg-card);
-  overflow: hidden;    /* clips thumbnail and content to rounded corners */
+  overflow: hidden;
   cursor: pointer;
-  /* Spring easing (cubic-bezier with values >1) creates a slight overshoot
-     that feels like the card "pops" out toward the user */
+  /* Spring easing (values > 1) gives a slight overshoot — feels like the card pops out */
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
               box-shadow 0.3s ease;
   position: relative;
 }
 
-/* On hover: scale up 6% and rise 4px.
-   var(--accent) is set inline on each card (e.g., style="--accent: #27ae60;")
-   so the glow ring color matches the section's accent color. */
+/* --accent is set inline on each card so the hover ring matches the section color */
 .card:hover {
   transform: scale(1.06) translateY(-4px);
-  box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px var(--accent);
-  z-index: 10; /* lifts above neighboring cards (but below nav buttons at 20) */
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--accent);
+  z-index: 10;
 }
 
-/* Makes the entire card a clickable link without changing its appearance.
-   Used on the Moving Cubes card to link to the GitHub repository. */
+/* Wraps the Moving Cubes card in a link — clicking anywhere opens the GitHub repo */
 .card-github-link {
-  display: block;      /* fills the full card area */
-  color: inherit;      /* inherits card text color */
+  display: block;
+  color: inherit;
   text-decoration: none;
 }
 
-/* Card thumbnail area — fixed height with centered content */
 .card-thumb {
   position: relative;
   height: 170px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* clips image/icon to the thumbnail bounds */
+  overflow: hidden;
 }
 
-/* For image-based cards (e.g., Moving Cubes):
-   object-fit: cover fills the thumbnail area completely
-   without stretching the image — crops if needed. */
+/* object-fit: cover fills the thumbnail without stretching the image */
 .card-thumb-img {
   width: 100%;
   height: 100%;
@@ -783,106 +482,99 @@ a {
   transition: transform 0.3s ease;
 }
 
-/* Image zooms in slightly when the card is hovered (matches emoji icon behavior) */
 .card:hover .card-thumb-img {
   transform: scale(1.06);
 }
 
-/* Emoji icon used as the thumbnail for non-image cards */
 .thumb-icon {
   font-size: 3.5rem;
   z-index: 1;
   transition: transform 0.3s ease;
-  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5)); /* shadow behind the emoji */
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
 }
 
-/* Emoji zooms in slightly on card hover */
 .card:hover .thumb-icon {
   transform: scale(1.1);
 }
 
-/* Text content area below the thumbnail */
 .card-info {
   padding: 1rem;
 }
 
-/* Project title — truncated with ellipsis if it overflows one line */
 .card-title {
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 0.25rem;
-  white-space: nowrap;       /* prevents wrapping */
-  overflow: hidden;          /* hides overflowing text */
-  text-overflow: ellipsis;   /* shows "..." when truncated */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   letter-spacing: -0.01em;
 }
 
-/* Student name shown in the section's accent color */
 .card-student {
   display: flex;
   align-items: center;
   gap: 0.3rem;
   font-size: 0.72rem;
   font-weight: 500;
-  color: var(--accent-red); /* green — matches the card's theme */
+  color: var(--accent-red);
   margin-bottom: 0.4rem;
   letter-spacing: 0.02em;
 }
 
-/* Small person icon before the student name */
 .student-icon {
   font-size: 0.65rem;
   opacity: 0.8;
 }
 
-/* Project description — clamped to exactly 2 lines.
-   webkit-line-clamp is widely supported in modern browsers.
-   Any text beyond 2 lines is hidden and replaced with "...". */
+/* Clamp description to two lines — widely supported and cleaner than JS truncation */
 .card-desc {
   font-size: 0.78rem;
   color: var(--text-secondary);
   line-height: 1.55;
   margin-bottom: 0.75rem;
   display: -webkit-box;
-  -webkit-line-clamp: 2;          /* show max 2 lines */
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* ══════════════════════════════════════════════════
-   CONTACT SECTION
-   Centered layout with three clickable contact cards.
-   Each card lifts and glows green on hover.
-══════════════════════════════════════════════════ */
+/* CONTACT SECTION */
 .contact-section {
   padding: 6rem 4%;
-  border-top: 1px solid var(--border); /* subtle separator from the project rows */
+  border-top: 1px solid var(--border);
   text-align: center;
 }
 
-/* Constrained width container to keep content readable */
 .contact-inner {
   max-width: 800px;
-  margin: 0 auto; /* centers the inner content horizontally */
+  margin: 0 auto;
 }
 
-/* Large section heading */
+.section-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-red);
+  margin-bottom: 0.75rem;
+}
+
 .contact-heading {
-  font-size: clamp(2rem, 4vw, 2.75rem); /* fluid size between 2rem and 2.75rem */
+  font-size: clamp(2rem, 4vw, 2.75rem);
   font-weight: 900;
   letter-spacing: -0.03em;
   margin-bottom: 0.75rem;
 }
 
-/* Descriptive text below the heading */
 .contact-sub {
   font-size: 1rem;
   color: var(--text-secondary);
   margin-bottom: 3rem;
 }
 
-/* Row of contact cards — wraps on narrow screens */
 .contact-links {
   display: flex;
   gap: 1.25rem;
@@ -890,7 +582,6 @@ a {
   flex-wrap: wrap;
 }
 
-/* Individual contact card — horizontal layout with icon + text */
 .contact-card {
   display: flex;
   align-items: center;
@@ -901,32 +592,29 @@ a {
   border-radius: var(--radius-card);
   transition: all var(--transition);
   min-width: 200px;
-  text-align: left; /* left-aligns card text even in the RTL page context */
+  text-align: left;
 }
 
-/* Hover effect: green border glow + upward lift + shadow */
+/* Hover: green border glow + upward lift */
 .contact-card:hover {
-  border-color: var(--accent-red);               /* green border */
-  background: rgba(39,174,96,0.07);              /* very faint green tint */
-  transform: translateY(-3px);                   /* lifts the card 3px */
-  box-shadow: 0 12px 30px rgba(39,174,96,0.15); /* green shadow below */
+  border-color: var(--accent-red);
+  background: rgba(39, 174, 96, 0.07);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(39, 174, 96, 0.15);
 }
 
-/* Circular icon container for emoji icons */
 .contact-icon {
   width: 44px;
   height: 44px;
-  border-radius: 50%; /* makes it a circle */
-  background: rgba(255,255,255,0.07);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1rem;
-  font-weight: 700;
-  flex-shrink: 0; /* never shrinks even if text is long */
+  flex-shrink: 0;
 }
 
-/* Contact label (e.g., "טלפון", "מיקום") */
 .contact-card strong {
   display: block;
   font-size: 0.875rem;
@@ -934,70 +622,54 @@ a {
   margin-bottom: 0.15rem;
 }
 
-/* Contact value (e.g., phone number, URL) */
 .contact-card p {
   font-size: 0.75rem;
   color: var(--text-muted);
 }
 
-/* ══════════════════════════════════════════════════
-   RESPONSIVE BREAKPOINTS
-══════════════════════════════════════════════════ */
+/* RESPONSIVE BREAKPOINTS */
 
-/* Tablet / small laptop: stack hero into a single column.
-   The code window is hidden to avoid cramping the title. */
+/* Tablet: collapse hero to single column, hide the code window */
 @media (max-width: 900px) {
   .hero {
-    flex-direction: column;    /* stack columns vertically */
-    align-items: flex-start;   /* align to the right (RTL start) */
+    flex-direction: column;
+    align-items: flex-start;
     padding-top: 5rem;
-    min-height: auto;          /* don't force full viewport height */
+    min-height: auto;
     padding-bottom: 3rem;
   }
 
-  /* Hide the code window on tablets/phones — title takes full width */
   .hero-visual {
     display: none;
   }
 
   .hero-content {
     padding-top: 2rem;
-    max-width: 100%; /* title spans the full width */
+    max-width: 100%;
   }
 }
 
-/* Mobile phone: further adjustments for small screens */
+/* Mobile: hide nav links, narrow cards, and stack contact cards vertically */
 @media (max-width: 600px) {
-  /* Hide nav links — only the logo remains visible on mobile */
   .nav-links {
     display: none;
   }
 
-  /* Slightly narrower cards on phones so two are partially visible */
   .card {
     flex: 0 0 240px;
   }
 
-  /* Shorter thumbnail height on phones */
   .card-thumb {
     height: 135px;
   }
 
-  /* Slightly smaller title on phones */
   .hero-title {
     font-size: 2.25rem;
   }
 
-  /* Stack action buttons vertically on phones */
-  .hero-actions {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  /* Stack contact cards vertically on phones */
   .contact-links {
     flex-direction: column;
-    align-items: stretch; /* cards fill the full phone width */
+    align-items: stretch;
   }
 
   .contact-card {
@@ -1005,32 +677,16 @@ a {
   }
 }
 
-/* ══════════════════════════════════════════════════
-   CUSTOM SCROLLBAR (Webkit browsers: Chrome, Safari, Edge)
-   Styled to match the dark theme.
-   Firefox uses scrollbar-width / scrollbar-color instead.
-══════════════════════════════════════════════════ */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-base); /* matches the page background */
-}
-::-webkit-scrollbar-thumb {
-  background: #2a2a2a; /* dark gray thumb */
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #3a3a3a; /* slightly lighter on hover */
-}
+/* SCROLLBAR & SELECTION */
 
-/* ══════════════════════════════════════════════════
-   TEXT SELECTION
-   Overrides the browser's default blue selection color
-   with a semi-transparent green matching the site accent.
-══════════════════════════════════════════════════ */
+/* Custom scrollbar for Webkit browsers — matches the dark theme */
+::-webkit-scrollbar       { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #3a3a3a; }
+
+/* Override the default blue selection with a green tint */
 ::selection {
-  background: rgba(39,174,96,0.35); /* green with 35% opacity */
+  background: rgba(39, 174, 96, 0.35);
   color: #fff;
 }

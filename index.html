@@ -1,119 +1,69 @@
 <!DOCTYPE html>
-<!--
-  ONO Academic College — Computer Science Department Project Portal
-  Language: Hebrew (RTL layout)
-  Theme: Netflix-inspired dark mode with green accent (#27ae60)
-  Fonts: Fira Code (monospace titles) + Inter (body text)
--->
+<!-- Ono Academic College - CS Department Project Portal-->
 <html lang="he" dir="rtl">
 <head>
-  <!-- Character encoding — required for Hebrew text to display correctly -->
   <meta charset="UTF-8" />
-  <!-- Makes the page responsive on mobile devices -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Browser tab title -->
   <title>מכללת אונו - מדמ"ח</title>
 
-  <!-- Preconnect hints speed up Google Fonts loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <!--
-    Fira Code: monospace font used for the hero title (code aesthetic)
-    Inter: clean sans-serif used for all body text, cards, and navigation
-  -->
+  <!-- Fira Code for the monospace hero title, Inter for everything else -->
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════════════════
-       NAVIGATION BAR
-       Fixed at the top of the screen.
-       Contains the college logo on the right (RTL start)
-       and navigation links on the left (RTL end).
-       Shrinks slightly when the user scrolls (via JS).
-  ═══════════════════════════════════════════════════ -->
+  <!-- NAVBAR: fixed top bar — logo on the right, links on the left -->
   <nav class="navbar">
-    <!-- College logo — uses mix-blend-mode: screen in CSS to remove
-         the white PNG background on the black navbar -->
     <a href="#" class="nav-logo">
+      <!-- mix-blend-mode: screen in CSS removes the white PNG background on black nav -->
       <img src="ono-logo.png" alt="מכללת אונו אקדמיק" class="nav-logo-img" />
     </a>
-    <!-- Navigation links — scroll to the #projects and #contact sections -->
     <ul class="nav-links">
       <li><a href="#projects">פרויקטים</a></li>
       <li><a href="#contact">צור קשר</a></li>
     </ul>
   </nav>
 
-  <!-- ═══════════════════════════════════════════════════
-       HERO SECTION
-       Full-viewport-height opening screen.
-       Layout: two columns (RTL)
-         Right column (.hero-content) — department title + subtitle
-         Left column  (.hero-visual)  — animated code window (bsearch.cpp)
-       Background layers (bottom to top):
-         1. Animated green grid (.hero-grid-bg)
-         2. Cinematic gradient overlay (.hero-overlay)
-         3. Content (z-index 2)
-  ═══════════════════════════════════════════════════ -->
+  <!-- HERO: full-viewport two-column layout
+       Right column — title + subtitle
+       Left column  — decorative code window (bsearch.cpp)
+       Background: animated green grid + cinematic gradient overlay -->
   <section class="hero">
 
-    <!-- Background layers — purely decorative, z-index 0/1 -->
     <div class="hero-bg">
-      <!-- Three-layer gradient: darkens right side (title area) and edges -->
       <div class="hero-overlay"></div>
-      <!-- Subtle animated grid of green lines drifting diagonally -->
       <div class="hero-grid-bg"></div>
     </div>
 
-    <!-- RIGHT COLUMN: Department title and subtitle -->
+    <!-- Right column: department title -->
     <div class="hero-content">
       <!--
-        Main heading uses Fira Code monospace font for a "code" aesthetic.
-        Two lines:
-          Line 1 (.title-line--sub): smaller, softer — institution name
-          Line 2 (.title-accent):    larger, neon green glow — department name
-        The blinking underscore (.title-cursor) mimics a terminal cursor.
+        Two-line heading in Fira Code (monospace) for a terminal look.
+        The blinking underscore at the end mimics a real cursor.
       -->
       <h1 class="hero-title">
         <span class="title-line title-line--sub">אתר הפרויקטים של מכללת אונו</span>
         <span class="title-line title-accent">מדעי המחשב<span class="title-cursor">_</span></span>
       </h1>
-
-      <!-- Subtitle tagline below the main title -->
       <p class="hero-portal-subtitle">מחלקת מדעי המחשב · גלריית פרויקטי סטודנטים</p>
     </div>
 
-    <!-- LEFT COLUMN: Code window (decorative macOS-style terminal) -->
+    <!-- Left column: macOS-style code editor window -->
     <div class="hero-visual">
-      <!--
-        Simulates a macOS code editor window.
-        Window bar has three traffic-light dots (red/yellow/green)
-        and the filename "bsearch.cpp" aligned to the left (LTR end).
-      -->
       <div class="code-window">
         <div class="window-bar">
-          <!-- macOS-style traffic light buttons (decorative) -->
+          <!-- Traffic light dots (decorative) -->
           <span class="dot-red"></span>
           <span class="dot-yellow"></span>
           <span class="dot-green"></span>
-          <!-- File name shown in the title bar -->
           <span class="window-title">bsearch.cpp</span>
         </div>
         <!--
-          C++ Recursive Binary Search function with rich syntax highlighting.
-          Each token is wrapped in a <span> with a semantic class:
-            .code-comment  — dimmed green  (// comments)
-            .code-type     — teal          (int type declarations)
-            .code-function — white/bold    (function name: bsearch)
-            .code-keyword  — blue          (if, return)
-            .code-variable — light gray    (arr, lo, hi, key, mid)
-            .code-number   — orange        (numeric literals: -1, 2, 1)
-            .code-operator — medium gray   (punctuation: (, ), {, }, ;, ==, <, >)
-          white-space: pre preserves indentation exactly.
+          C++ recursive binary search with VS Code One Dark Pro syntax colors.
+          Each token type has its own span class — see style.css .code-block section.
         -->
         <pre class="code-block"><span class="code-comment">// ── Recursive Binary Search ─────────</span>
 <span class="code-type">int</span> <span class="code-function">bsearch</span><span class="code-operator">(</span><span class="code-type">int</span><span class="code-operator">*</span> <span class="code-variable">arr</span><span class="code-operator">,</span>
@@ -127,39 +77,24 @@
     <span class="code-operator">:</span> <span class="code-function">bsearch</span><span class="code-operator">(</span><span class="code-variable">arr</span><span class="code-operator">,</span> <span class="code-variable">lo</span><span class="code-operator">,</span>  <span class="code-variable">mid</span><span class="code-operator">-</span><span class="code-number">1</span><span class="code-operator">,</span> <span class="code-variable">key</span><span class="code-operator">);</span>
 <span class="code-operator">}</span></pre>
       </div>
-      <!-- Small label shown below the code window -->
       <div class="hero-featured-label">
         <span class="featured-dot"></span>
         חיפוש בינארי · C++ · רקורסיה
       </div>
     </div>
 
-    <!-- Animated "scroll down" hint — positioned at the bottom-right of the hero -->
     <div class="hero-scroll-indicator">
       <span>גלול לגילוי</span>
       <div class="scroll-line"></div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════
-       PROJECTS SECTION
-       Contains 6 horizontal carousels (one per subject area).
-       Each carousel has:
-         - A header (.row-header) with title and subtitle
-         - A .carousel-wrapper containing:
-             • A .prev button (right edge, scrolls right = go back)
-             • A .carousel div (the scrollable card track)
-             • A .next button (left edge, scrolls left = advance)
-       RTL note: content starts on the right, scrolls toward the left.
-  ═══════════════════════════════════════════════════ -->
+  <!-- PROJECTS: six horizontal carousels, one per subject area.
+       RTL note — content starts on the right, scrolls toward the left.
+       Each carousel-wrapper holds: prev button | scrollable track | next button -->
   <main id="projects" class="projects-section">
 
-    <!-- ───────────────────────────────────────────
-         ROW 0: UNITY GAME DEVELOPMENT
-         Accent color: #e74c3c (red)
-         This section showcases Unity engine projects built during the degree.
-         The Moving Cubes card links directly to its GitHub repository.
-    ─────────────────────────────────────────── -->
+    <!-- Unity Game Development (accent: red #e74c3c) -->
     <div class="row-section">
       <div class="row-header">
         <div class="row-header-left">
@@ -168,20 +103,12 @@
         </div>
       </div>
       <div class="carousel-wrapper">
-        <!-- Right arrow: scrolls the carousel RIGHT (back toward the start) -->
         <button class="carousel-btn prev" aria-label="גלול ימינה">›</button>
         <div class="carousel">
 
-          <!--
-            MOVING CUBES — Featured Unity Project
-            The entire card is wrapped in an <a> tag (.card-github-link)
-            so clicking anywhere on the card opens the GitHub repo in a new tab.
-            The thumbnail uses an actual project screenshot (Moving-Cubes-logo.png)
-            instead of the emoji placeholder used by other cards.
-          -->
+          <!-- Moving Cubes — full card is a link to the GitHub repo -->
           <article class="card" style="--accent: #e74c3c;">
             <a href="https://github.com/omercohen4/MovingCubes-game" target="_blank" rel="noopener noreferrer" class="card-github-link">
-              <!-- Project screenshot fills the thumbnail area via object-fit: cover -->
               <div class="card-thumb">
                 <img src="Moving-Cubes-logo.png" alt="Moving Cubes" class="card-thumb-img" />
               </div>
@@ -194,29 +121,22 @@
           </article>
 
         </div>
-        <!-- Left arrow: scrolls the carousel LEFT (advance to more cards) -->
         <button class="carousel-btn next" aria-label="גלול שמאלה">‹</button>
       </div>
     </div>
 
-    <!-- ───────────────────────────────────────────
-         ROW 1: ARTIFICIAL INTELLIGENCE
-         Accent color: #27ae60 (green)
-         9 cards covering ML, deep learning, NLP, and computer vision projects.
-    ─────────────────────────────────────────── -->
+    <!-- Artificial Intelligence (accent: green #27ae60) -->
     <div class="row-section">
       <div class="row-header">
         <div class="row-header-left">
           <h2 class="row-title">בינה מלאכותית</h2>
           <span class="row-subtitle">למידת מכונה · למידה עמוקה · עיבוד שפה טבעית</span>
         </div>
-
       </div>
       <div class="carousel-wrapper">
         <button class="carousel-btn prev" aria-label="גלול ימינה">›</button>
         <div class="carousel">
 
-          <!-- Card: Neural Network Classifier -->
           <article class="card" style="--accent: #27ae60;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #1a0a0a 0%, #3d0f0f 100%);">
               <div class="thumb-icon">🧠</div>
@@ -228,7 +148,6 @@
             </div>
           </article>
 
-          <!-- Card: Hebrew Sentiment Analyzer -->
           <article class="card" style="--accent: #27ae60;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #0a0a1a 0%, #0f0f3d 100%);">
               <div class="thumb-icon">💬</div>
@@ -240,7 +159,6 @@
             </div>
           </article>
 
-          <!-- Card: Reinforcement Learning Game Agent -->
           <article class="card" style="--accent: #27ae60;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #0a1a0a 0%, #0f3d0f 100%);">
               <div class="thumb-icon">🎮</div>
@@ -252,7 +170,6 @@
             </div>
           </article>
 
-          <!-- Card: Image Recognition App -->
           <article class="card" style="--accent: #27ae60;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #1a1a0a 0%, #3d3d0f 100%);">
               <div class="thumb-icon">🖼️</div>
@@ -264,7 +181,6 @@
             </div>
           </article>
 
-          <!-- Card: Real-Time Emotion Recognition -->
           <article class="card" style="--accent: #27ae60;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #1a0a10 0%, #3d0f25 100%);">
               <div class="thumb-icon">😄</div>
@@ -276,7 +192,6 @@
             </div>
           </article>
 
-          <!-- Card: Medical NLP Chatbot -->
           <article class="card" style="--accent: #27ae60;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #0a1015 0%, #0f2535 100%);">
               <div class="thumb-icon">🏥</div>
@@ -288,7 +203,6 @@
             </div>
           </article>
 
-          <!-- Card: Real Estate Price Predictor -->
           <article class="card" style="--accent: #27ae60;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #0f1a0a 0%, #253d0f 100%);">
               <div class="thumb-icon">🏠</div>
@@ -300,7 +214,6 @@
             </div>
           </article>
 
-          <!-- Card: Personal Music Recommender -->
           <article class="card" style="--accent: #27ae60;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #1a0a1a 0%, #350f3d 100%);">
               <div class="thumb-icon">🎵</div>
@@ -312,7 +225,6 @@
             </div>
           </article>
 
-          <!-- Card: Hebrew Handwriting Recognition -->
           <article class="card" style="--accent: #27ae60;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #0a0f1a 0%, #0f1a35 100%);">
               <div class="thumb-icon">✍️</div>
@@ -329,24 +241,18 @@
       </div>
     </div>
 
-    <!-- ───────────────────────────────────────────
-         ROW 2: ALGORITHMS & DATA STRUCTURES
-         Accent color: #0070f3 (blue)
-         4 cards covering pathfinding, genetic algorithms, sorting, and tree visualization.
-    ─────────────────────────────────────────── -->
+    <!-- Algorithms & Data Structures (accent: blue #0070f3) -->
     <div class="row-section">
       <div class="row-header">
         <div class="row-header-left">
           <h2 class="row-title">אלגוריתמים ומבני נתונים</h2>
           <span class="row-subtitle">סיבוכיות · תורת גרפים · אופטימיזציה</span>
         </div>
-
       </div>
       <div class="carousel-wrapper">
         <button class="carousel-btn prev" aria-label="גלול ימינה">›</button>
         <div class="carousel">
 
-          <!-- Card: Pathfinding Visualizer (Dijkstra, A*, BFS) -->
           <article class="card" style="--accent: #0070f3;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #010d1a 0%, #012a4a 100%);">
               <div class="thumb-icon">🗺️</div>
@@ -358,7 +264,6 @@
             </div>
           </article>
 
-          <!-- Card: Genetic Algorithm Solver (Traveling Salesman) -->
           <article class="card" style="--accent: #0070f3;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #0a0a1a 0%, #1a0a3d 100%);">
               <div class="thumb-icon">🧬</div>
@@ -370,7 +275,6 @@
             </div>
           </article>
 
-          <!-- Card: Sorting Algorithm Benchmark -->
           <article class="card" style="--accent: #0070f3;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #0d1a0a 0%, #1a3d0f 100%);">
               <div class="thumb-icon">⚡</div>
@@ -382,7 +286,6 @@
             </div>
           </article>
 
-          <!-- Card: Interactive AVL Tree Visualizer -->
           <article class="card" style="--accent: #0070f3;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #1a0d0a 0%, #3d1a0f 100%);">
               <div class="thumb-icon">🌳</div>
@@ -399,24 +302,18 @@
       </div>
     </div>
 
-    <!-- ───────────────────────────────────────────
-         ROW 3: SYSTEMS PROGRAMMING
-         Accent color: #9333ea (purple)
-         4 cards covering OS-level, concurrency, and low-level C/C++ projects.
-    ─────────────────────────────────────────── -->
+    <!-- Systems Programming (accent: purple #9333ea) -->
     <div class="row-section">
       <div class="row-header">
         <div class="row-header-left">
           <h2 class="row-title">תכנות מערכות</h2>
           <span class="row-subtitle">מערכות הפעלה · מקביליות · תכנות ברמה נמוכה</span>
         </div>
-
       </div>
       <div class="carousel-wrapper">
         <button class="carousel-btn prev" aria-label="גלול ימינה">›</button>
         <div class="carousel">
 
-          <!-- Card: Minimal POSIX Shell -->
           <article class="card" style="--accent: #9333ea;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #0f0a1a 0%, #2a0f3d 100%);">
               <div class="thumb-icon">🐚</div>
@@ -428,7 +325,6 @@
             </div>
           </article>
 
-          <!-- Card: Thread Pool Library -->
           <article class="card" style="--accent: #9333ea;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #1a0a0f 0%, #3d0f2a 100%);">
               <div class="thumb-icon">🧵</div>
@@ -440,7 +336,6 @@
             </div>
           </article>
 
-          <!-- Card: Custom Memory Allocator -->
           <article class="card" style="--accent: #9333ea;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #0a1a10 0%, #0f3d20 100%);">
               <div class="thumb-icon">💾</div>
@@ -452,7 +347,6 @@
             </div>
           </article>
 
-          <!-- Card: Deadlock Detector -->
           <article class="card" style="--accent: #9333ea;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #1a100a 0%, #3d2a0f 100%);">
               <div class="thumb-icon">🔒</div>
@@ -469,24 +363,18 @@
       </div>
     </div>
 
-    <!-- ───────────────────────────────────────────
-         ROW 4: WEB DEVELOPMENT
-         Accent color: #f59e0b (amber)
-         4 cards covering full-stack, real-time, and static-site projects.
-    ─────────────────────────────────────────── -->
+    <!-- Web Development (accent: amber #f59e0b) -->
     <div class="row-section">
       <div class="row-header">
         <div class="row-header-left">
           <h2 class="row-title">פיתוח Web</h2>
           <span class="row-subtitle">פול-סטאק · ממשקי API · אפליקציות בזמן אמת</span>
         </div>
-
       </div>
       <div class="carousel-wrapper">
         <button class="carousel-btn prev" aria-label="גלול ימינה">›</button>
         <div class="carousel">
 
-          <!-- Card: E-Commerce Platform (React + Node + MongoDB) -->
           <article class="card" style="--accent: #f59e0b;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #1a150a 0%, #3d2f0f 100%);">
               <div class="thumb-icon">🛍️</div>
@@ -498,7 +386,6 @@
             </div>
           </article>
 
-          <!-- Card: Real-Time Chat App (WebSockets) -->
           <article class="card" style="--accent: #f59e0b;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #0a1015 0%, #0f2030 100%);">
               <div class="thumb-icon">💬</div>
@@ -510,7 +397,6 @@
             </div>
           </article>
 
-          <!-- Card: Analytics Dashboard (D3.js) -->
           <article class="card" style="--accent: #f59e0b;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #0f0a1a 0%, #280f3d 100%);">
               <div class="thumb-icon">📊</div>
@@ -522,7 +408,6 @@
             </div>
           </article>
 
-          <!-- Card: Markdown Blog Engine (Static Site Generator) -->
           <article class="card" style="--accent: #f59e0b;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #0a1a0a 0%, #1a3d1a 100%);">
               <div class="thumb-icon">📝</div>
@@ -539,24 +424,18 @@
       </div>
     </div>
 
-    <!-- ───────────────────────────────────────────
-         ROW 5: DATABASE SYSTEMS
-         Accent color: #10b981 (teal-green)
-         3 cards covering relational design, ORM, and query optimization.
-    ─────────────────────────────────────────── -->
+    <!-- Database Systems (accent: teal #10b981) -->
     <div class="row-section">
       <div class="row-header">
         <div class="row-header-left">
           <h2 class="row-title">מערכות מסדי נתונים</h2>
           <span class="row-subtitle">רלציוני · NoSQL · אופטימיזציית שאילתות</span>
         </div>
-
       </div>
       <div class="carousel-wrapper">
         <button class="carousel-btn prev" aria-label="גלול ימינה">›</button>
         <div class="carousel">
 
-          <!-- Card: Hospital Database Schema (3NF) -->
           <article class="card" style="--accent: #10b981;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #0a1a10 0%, #0f3d20 100%);">
               <div class="thumb-icon">🏥</div>
@@ -568,7 +447,6 @@
             </div>
           </article>
 
-          <!-- Card: Lightweight Python ORM -->
           <article class="card" style="--accent: #10b981;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #1a0a10 0%, #3d0f20 100%);">
               <div class="thumb-icon">🔄</div>
@@ -580,7 +458,6 @@
             </div>
           </article>
 
-          <!-- Card: PostgreSQL Query Optimization Research -->
           <article class="card" style="--accent: #10b981;">
             <div class="card-thumb" style="background: linear-gradient(135deg, #0a0f1a 0%, #0f203d 100%);">
               <div class="thumb-icon">📈</div>
@@ -599,14 +476,7 @@
 
   </main>
 
-  <!-- ═══════════════════════════════════════════════════
-       CONTACT SECTION
-       Three clickable contact cards:
-         1. Phone — opens phone dialer (tel: link)
-         2. College website — opens ono.ac.il in a new tab
-         3. Location — opens Google Maps in a new tab
-       Each card has a hover effect: green border glow + upward lift.
-  ═══════════════════════════════════════════════════ -->
+  <!-- CONTACT: three clickable cards — phone, website, and Google Maps location -->
   <section id="contact" class="contact-section">
     <div class="contact-inner">
       <span class="section-label">צור קשר</span>
@@ -615,7 +485,6 @@
         שאלות על פרויקטים, הגשות או התוכנית האקדמית? פנו אלינו ישירות.
       </p>
       <div class="contact-links">
-        <!-- Phone card — tel: link opens the device's phone dialer on mobile -->
         <a href="tel:03-5311888" class="contact-card">
           <div class="contact-icon">📞</div>
           <div>
@@ -623,7 +492,6 @@
             <p>03-5311888</p>
           </div>
         </a>
-        <!-- Website card — opens ono.ac.il in a new browser tab -->
         <a href="https://www.ono.ac.il/" target="_blank" rel="noopener noreferrer" class="contact-card">
           <div class="contact-icon">🌐</div>
           <div>
@@ -631,7 +499,6 @@
             <p>www.ono.ac.il</p>
           </div>
         </a>
-        <!-- Location card — opens Google Maps search for the college address -->
         <a href="https://www.google.com/maps/search/?api=1&query=השדרה+האקדמית+1+קריית+אונו" target="_blank" rel="noopener noreferrer" class="contact-card">
           <div class="contact-icon">📍</div>
           <div>
@@ -643,66 +510,40 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════
-       JAVASCRIPT
-       Two behaviours are wired up here:
-
-       1. CAROUSEL NAVIGATION (RTL-aware)
-          Each .carousel-wrapper gets prev/next buttons.
-          RTL layout means:
-            - Content starts on the RIGHT
-            - Scrolling LEFT reveals more cards
-          So:
-            - prevBtn (right edge) scrolls RIGHT  → goes back
-            - nextBtn (left edge)  scrolls LEFT   → shows more
-          Button visibility is toggled with opacity based on scroll position.
-          Cross-browser RTL normalization:
-            Chrome: scrollLeft starts at 0, goes negative → use Math.abs(sl)
-            Firefox: scrollLeft starts at maxScroll, goes to 0 → use (maxScroll - sl)
-          The formula  norm = sl <= 0 ? Math.abs(sl) : (maxScroll - sl)
-          gives 0 at the rightmost position in both browsers.
-
-       2. NAVBAR SHRINK ON SCROLL
-          Adds the class "scrolled" to .navbar after 60px of scroll,
-          which triggers a CSS transition that reduces the navbar padding.
-  ═══════════════════════════════════════════════════ -->
   <script>
-    // Carousel scroll logic — RTL-aware
+    // RTL-aware carousel navigation
+    // In RTL, content starts on the right and scrolls left, so:
+    //   prev button (right edge) → scrollBy positive = go back toward start
+    //   next button (left edge)  → scrollBy negative = advance to more cards
     document.querySelectorAll('.carousel-wrapper').forEach(wrapper => {
-      const carousel = wrapper.querySelector('.carousel');
-      const prevBtn  = wrapper.querySelector('.carousel-btn.prev');
-      const nextBtn  = wrapper.querySelector('.carousel-btn.next');
-      const scrollAmt = 340; // pixels to scroll per button click
+      const carousel  = wrapper.querySelector('.carousel');
+      const prevBtn   = wrapper.querySelector('.carousel-btn.prev');
+      const nextBtn   = wrapper.querySelector('.carousel-btn.next');
+      const scrollAmt = 340;
 
-      // Right button: scroll right (go back toward start)
-      prevBtn.addEventListener('click', () => {
-        carousel.scrollBy({ left: scrollAmt, behavior: 'smooth' });
-      });
-      // Left button: scroll left (advance to more cards)
-      nextBtn.addEventListener('click', () => {
-        carousel.scrollBy({ left: -scrollAmt, behavior: 'smooth' });
-      });
+      prevBtn.addEventListener('click', () => carousel.scrollBy({ left: scrollAmt, behavior: 'smooth' }));
+      nextBtn.addEventListener('click', () => carousel.scrollBy({ left: -scrollAmt, behavior: 'smooth' }));
 
-      // Show/hide buttons based on current scroll position
       const updateBtns = () => {
-        const sl = carousel.scrollLeft;
+        const sl        = carousel.scrollLeft;
         const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-        // Normalize scrollLeft across Chrome (negative RTL) and Firefox (positive RTL)
-        const norm = sl <= 0 ? Math.abs(sl) : (maxScroll - sl);
 
-        // Hide right (prev) button when at the rightmost start position
+        // Chrome sets scrollLeft to 0 at start and goes negative in RTL.
+        // Firefox keeps it positive and starts at maxScroll. This formula handles both.
+        const norm  = sl <= 0 ? Math.abs(sl) : (maxScroll - sl);
+        const atEnd = norm >= maxScroll - 4;
+
         prevBtn.style.opacity       = norm <= 1 ? '0' : '1';
         prevBtn.style.pointerEvents = norm <= 1 ? 'none' : 'auto';
-        // Hide left (next) button when scrolled all the way to the left end
-        const atEnd = norm >= maxScroll - 4;
         nextBtn.style.opacity       = atEnd ? '0' : '1';
         nextBtn.style.pointerEvents = atEnd ? 'none' : 'auto';
       };
+
       carousel.addEventListener('scroll', updateBtns);
-      updateBtns(); // run once on page load to set initial button states
+      updateBtns(); // set initial button states on page load
     });
 
-    // Navbar shrink on scroll — adds padding compression after 60px
+    // Compact the navbar after scrolling past the hero
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
       navbar.classList.toggle('scrolled', window.scrollY > 60);
